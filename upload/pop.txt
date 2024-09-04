@@ -1,0 +1,82 @@
+<?php
+function getMots($text)
+{
+    $mots = preg_split('/[\s,!.?]+/', $text, -1, PREG_SPLIT_NO_EMPTY);
+
+    return $mots;
+}
+function comparaison($file1, $file2)
+{
+    $mots1 =  getMots($file1);
+    $mots2 =  getMots($file2);
+
+    $count = 0;
+    for ($i = 0; $i <  count($mots1); $i++) {
+        # code...
+        for ($j = 0; $j <  count($mots2); $j++) {
+            if (strcasecmp($mots1[$i], $mots2[$j])  == 0) {
+                // echo " " . $mots1[$i] . "-" . $mots2[$j];
+                $count++;
+                break;
+                # code...
+            }
+            # code...
+        }
+    }
+
+    $max = max(count($mots1), count($mots2));
+    // echo $count . "\n";
+    echo (($count / $max) * 100) . " %  de resemblence";
+}
+function upload($name)
+{
+    $target_dir = "upload/";
+
+    // Nom du fichier téléchargé
+    $target_file = $target_dir . basename($_FILES[$name]["name"]);
+    
+    // Variable pour vérifier si l'upload est valide
+    $uploadOk = 1;
+    
+    // Type de fichier
+    $fileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+    
+    // Vérifier si le fichier est de type txt
+    if($fileType != "txt") {
+        // echo "Désolé, seuls les fichiers .txt sont autorisés.";
+        $uploadOk = 0;
+    }
+    
+    // Vérifier si le fichier existe déjà
+ 
+    
+    // Limiter la taille du fichier (exemple : 2Mo)
+    if ($_FILES[$name]["size"] > 2000000) {
+        // echo "Désolé, votre fichier est trop volumineux.";
+        $uploadOk = 0;
+    }
+    
+    // Vérifier si l'upload est autorisé
+    if ($uploadOk == 0) {
+        // echo "Désolé, votre fichier n'a pas été téléchargé.";
+    } else {
+        if (move_uploaded_file($_FILES[$name]["tmp_name"], $target_file)) {
+            // echo "Le fichier ". htmlspecialchars(basename($_FILES[$name]["name"])) . " a été téléchargé.";
+        } else {
+            // echo "Désolé, une erreur est survenue lors du téléchargement de votre fichier.";
+        }
+    }
+}
+function getContent($filetxt)
+{
+    $filename = 'upload/'.$filetxt;
+    
+    $contenu = file_get_contents($filename);
+    
+    if ($contenu !== false) {
+        // echo $contenu;
+    } else {
+        echo "Impossible de lire le fichier ou contenu vide";
+    }
+    return $contenu;
+}

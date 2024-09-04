@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+ form
+ {
+    text-align: center;
+    justify-content: center;
+ }
+ #sub 
+ {
+    display: flex;
+    margin: auto;
+ }
+.big_box
+ {
+    display: flex;
+    justify-content: center;
+ }
+ .small_box1
+ {
+
+ }
+
+input[type="file"] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background: #f9f9f9;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #0056b3;
+}
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    margin: auto;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.submit-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
+}
+
+</style>
+
+<body>
+    <form action="traitement.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+        <div class="big_box" >
+            <div class="small_box1" >
+                <img src="file.jpg"  width="100px" >
+                <p> <input type="file" name="fichier1" ></p>
+
+            </div>
+            <div class="small_box1" >
+                <img src="file.jpg"  width="100px" >
+                <p> <input type="file" name="fichier2" ></p>
+
+            </div>
+        </div>
+        
+        <img src="back.png" alt="">
+        <input type="submit" name="Comparer" value="Comparer"  class="submit-button">
+    </form>
+</body>
+
+</html>
